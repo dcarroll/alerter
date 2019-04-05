@@ -1,0 +1,7 @@
+{
+  "commandDescription": "configure the twilio authentication and origination information",
+  "authtokenFlagDescription": "twilio authorization token",
+  "accountsidFlagDescription": "twilio account sid",
+  "verificationphonenumberFlagDescription": "phone number to send verification message to",
+  "twilionmberFlagDescription": "valid twilio phone number"
+}

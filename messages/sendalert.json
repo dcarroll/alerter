@@ -1,0 +1,6 @@
+{
+    "commandDescription": "sends specified message to the specified phone number",
+    "messageFlagDescription": "the message to send",
+    "phoneFlagDescription": "the phone to send the message to"
+  }
+  

@@ -31,6 +31,7 @@ USAGE
 <!-- usagestop -->
 <!-- commands -->
 * [`sfdx alerter:config -t <string> -a <string> -v <string> -n <string> [--json] [--loglevel trace|debug|info|warn|error|fatal]`](#sfdx-alerterconfig--t-string--a-string--v-string--n-string---json---loglevel-tracedebuginfowarnerrorfatal)
+* [`sfdx alerter:sendalert -m <string> -p <string> [--json] [--loglevel trace|debug|info|warn|error|fatal]`](#sfdx-alertersendalert--m-string--p-string---json---loglevel-tracedebuginfowarnerrorfatal)
 
 ## `sfdx alerter:config -t <string> -a <string> -v <string> -n <string> [--json] [--loglevel trace|debug|info|warn|error|fatal]`
 
@@ -56,6 +57,27 @@ EXAMPLE
 ```
 
 _See code: [src/commands/alerter/config.ts](https://github.com/dcarroll/alerter/blob/v1.0.0/src/commands/alerter/config.ts)_
+
+## `sfdx alerter:sendalert -m <string> -p <string> [--json] [--loglevel trace|debug|info|warn|error|fatal]`
+
+sends specified message to the specified phone number
+
+```
+USAGE
+  $ sfdx alerter:sendalert -m <string> -p <string> [--json] [--loglevel trace|debug|info|warn|error|fatal]
+
+OPTIONS
+  -m, --message=message                           (required) the message to send
+  -p, --phone=phone                               (required) the phone to send the message to
+  --json                                          format output as json
+  --loglevel=(trace|debug|info|warn|error|fatal)  [default: warn] logging level for this command invocation
+
+EXAMPLE
+  $ sfdx alerter:sendalert --message 'Hey, you package is created' --phone 1234567890
+     Ok, saved the auth token and the account sid, you should have received a message to verify it's working
+```
+
+_See code: [src/commands/alerter/sendalert.ts](https://github.com/dcarroll/alerter/blob/v1.0.0/src/commands/alerter/sendalert.ts)_
 <!-- commandsstop -->
 <!-- debugging-your-plugin -->
 # Debugging your plugin

@@ -1,0 +1,6 @@
+{
+    "commandDescription": "sends specified message to the specified phone number",
+    "messageFlagDescription": "the message to send",
+    "emojiFlagDescription": "an emoji to add like ':thumbsup:' "
+  }
+  

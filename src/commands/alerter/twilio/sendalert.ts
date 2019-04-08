@@ -1,15 +1,15 @@
 import { flags, SfdxCommand } from '@salesforce/command';
-import { Messages } from '@salesforce/core';
+import { Messages, SfdxError } from '@salesforce/core';
 import { AnyJson } from '@salesforce/ts-types';
 import { Twilio } from 'twilio';
-import TwilioConfig from '../../lib/twilioconfig';
+import TwilioConfig from '../../../lib/twilioconfig';
 
 // Initialize Messages with the current plugin directory
 Messages.importMessagesDirectory(__dirname);
 
 // Load the specific messages for this file. Messages from @salesforce/command, @salesforce/core,
 // or any library that is using the messages framework can also be loaded this way.
-const messages = Messages.loadMessages('alerter', 'sendalert');
+const messages = Messages.loadMessages('alerter', 'twiliosendalert');
 
 export default class SendAlert extends SfdxCommand {
 
@@ -17,7 +17,7 @@ export default class SendAlert extends SfdxCommand {
 
   public static examples = [
   `$ sfdx alerter:sendalert --message 'Hey, you package is created' --phone 1234567890
-  Ok, saved the auth token and the account sid, you should have received a message to verify it's working
+  Message sent!
   `
   ];
 
@@ -57,6 +57,7 @@ export default class SendAlert extends SfdxCommand {
         return { message: 'Message successfully sent to ' + this.flags.phone, messageSid: message.sid };
       }).catch((reason) => {
         this.ux.error(reason);
+        throw new SfdxError(reason.message, 'alerter', [], 1, reason);
         return (reason);
       })
     

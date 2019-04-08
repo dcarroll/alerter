@@ -1,0 +1,4 @@
+{
+  "commandDescription": "configure the slack authentication and hook url",
+  "hookurlFlagDescription": "slack hook url"
+}

@@ -2,14 +2,14 @@ import { flags, SfdxCommand } from '@salesforce/command';
 import { Messages, SfdxError } from '@salesforce/core';
 import { AnyJson } from '@salesforce/ts-types';
 import { Twilio } from 'twilio';
-import TwilioConfig from '../../lib/twilioconfig';
+import TwilioConfig from '../../../lib/twilioconfig';
 
 // Initialize Messages with the current plugin directory
 Messages.importMessagesDirectory(__dirname);
 
 // Load the specific messages for this file. Messages from @salesforce/command, @salesforce/core,
 // or any library that is using the messages framework can also be loaded this way.
-const messages = Messages.loadMessages('alerter', 'config');
+const messages = Messages.loadMessages('alerter', 'twilioconfig');
 
 export default class Configure extends SfdxCommand {
 
@@ -53,12 +53,12 @@ export default class Configure extends SfdxCommand {
       to: this.flags.verificationphonenumber,  // Text this number
       from: this.flags.twilionumber // From a valid Twilio number
     }).then(async (message) => {
-      console.log('Message successfully sent, configuration confirmed \nMessage Id: ' + message.sid);
-      const x = await TwilioConfig.create({ isGlobal: true });
-      x.set('authtoken', this.flags.authtoken);
-      x.set('accountsid', this.flags.accountsid);
-      x.set('twilionumber', this.flags.twilionumber);
-      x.write();
+      this.ux.log('Message successfully sent, configuration confirmed - Message Id: ' + message.sid);
+      const twilioconfig = await TwilioConfig.create({ isGlobal: true });
+      twilioconfig.set('authtoken', this.flags.authtoken);
+      twilioconfig.set('accountsid', this.flags.accountsid);
+      twilioconfig.set('twilionumber', this.flags.twilionumber);
+      twilioconfig.write();
       this.results = { message: 'Message successfully sent, configuration confirmed', messageSid: message.sid };
     }).catch((reason) => {
       const e = new SfdxError(reason.message, 'authentication error', ['Check your token and secret and twilio number.']);

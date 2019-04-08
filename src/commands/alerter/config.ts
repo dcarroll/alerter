@@ -45,11 +45,9 @@ export default class Configure extends SfdxCommand {
 
   public async run(): Promise<AnyJson> {
 
-    // const config = await Config.create({});
-    this.ux.log('here');
-
     // Test the twilio setup
     const client = new Twilio(this.flags.accountsid, this.flags.authtoken);
+
     await client.messages.create({
       body: 'Hello from Oclif',
       to: this.flags.verificationphonenumber,  // Text this number
@@ -63,11 +61,10 @@ export default class Configure extends SfdxCommand {
       x.write();
       this.results = { message: 'Message successfully sent, configuration confirmed', messageSid: message.sid };
     }).catch((reason) => {
-      //this.result.data = reason;
-      throw new SfdxError(reason.message);
-      // this.ux.error(reason);
-      // return reason;
+      const e = new SfdxError(reason.message, 'authentication error', ['Check your token and secret and twilio number.']);
+      this.results = e;
+      throw e;
     })
-    if (this.results) return this.results;
+    return this.results;
   }
 }

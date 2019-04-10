@@ -1,4 +1,5 @@
 {
   "commandDescription": "configure the slack authentication and hook url",
-  "hookurlFlagDescription": "slack hook url"
+  "slacktokenFlagDescription": "slack Oauth 2.0 token (from slack app web interface)",
+  "slackchannelFlagDescription": "slack channel to post verification message to, defaults to Slackbot"
 }

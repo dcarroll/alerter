@@ -1,8 +1,10 @@
-import { flags, SfdxCommand } from '@salesforce/command';
-import { Messages, SfdxError } from '@salesforce/core';
-import { AnyJson } from '@salesforce/ts-types';
-import { IncomingWebhook, IncomingWebhookResult } from '@slack/webhook';
-import SlackConfig from '../../../lib/slackconfig';
+import { flags, SfdxCommand, TableOptions }   from '@salesforce/command';
+import { Messages, SfdxError }  from '@salesforce/core';
+import { AnyJson }              from '@salesforce/ts-types';
+import SlackConfig              from '../../../lib/slackconfig';
+import SlackLib                 from '../../../lib/slacklib';
+import { TableColumn } from 'cli-ux/lib/styled/table';
+
 
 // Initialize Messages with the current plugin directory
 Messages.importMessagesDirectory(__dirname);
@@ -16,48 +18,43 @@ export default class Configure extends SfdxCommand {
   public static description = messages.getMessage('commandDescription');
 
   public static examples = [
-  `$ sfdx alerter:slack:config --hookurl https://hooks.slack.com/services/TXXXXXXXX/BXXXXXXXX/XXXXX
-  Message successfully sent, configuration confirmed 
+  `$ sfdx alerter:slack:config --slacktoken xxxxxxx --slackchannel '#CoolKids'
+  Successfully configured alerter! Congratulations! 
   `
   ];
 
   public static args = [];
 
   protected static flagsConfig = {
-    // flag with a value (-n, --name=VALUE)
-    hookurl: flags.string({char: 'u', required: true, description: messages.getMessage('hookurlFlagDescription')})
+    slacktoken: flags.string( { char: 't', required: true, description: messages.getMessage('slacktokenFlagDescription')}),
+    slackchannel: flags.string({ char: 'c', required: false, description: messages.getMessage('slackchannelFlagDescription')})
   };
 
-  // Comment this out if your command does not require an org username
-  protected static requiresUsername = false;
-
-  // Comment this out if your command does not support a hub org username
-  protected static supportsDevhubUsername = false;
-
-  // Set this to true if your command requires a project workspace; 'requiresProject' is false by default
-  protected static requiresProject = false;
-
-  protected results;
+  protected async validateToken(): Promise<any> {
+    
+    const resp = await SlackLib.postMessage('Successfully configured alerter! Congratulations!', this.flags.slackchannel, ':thumbsup:', this.flags.slacktoken ); 
+    if (resp.ok === true) {
+      const slackconfig = await SlackConfig.create({ isGlobal: true });
+      slackconfig.set('slacktoken', this.flags.slacktoken);
+      slackconfig.write();
+      this.ux.log('Successfully configured alerter! Congratulations!');
+      return resp;
+    } else {
+      throw new SfdxError(resp.error);
+    }
+  }
 
   public async run(): Promise<AnyJson> {
-
-    const webhook = new IncomingWebhook(this.flags.hookurl,
-      {
-        icon_emoji: ':thumbsup:'
+    const res = await this.validateToken();
+    const refreshChannel = await this.ux.prompt('Refresh channel list <y/n>?', { default: 'n', type: 'single' });
+    if (refreshChannel === 'y') {
+      const channels = await SlackLib.refreshChannelList();
+      this.ux.log('');
+      this.ux.table(channels, { columns: [ 
+        { key: 'name', label: 'Name' },
+        { key: 'id', label: 'ID'}, 
+        { key: 'purpose.value', label: 'Purpose'}]});
       }
-    );
-
-    return await webhook.send({ text: 'Your slack alerter is working!', icon_emoji: ':thumbsup:'}).then(async (value: IncomingWebhookResult) => {
-      this.results = value.text;
-      const slackconfig = await SlackConfig.create({ isGlobal: true });
-      slackconfig.set('hookurl', this.flags.hookurl);
-      slackconfig.write();
-      return this.results;
-    }).catch((reason) => {
-      const e = new SfdxError(reason.message, 'slack-ish error', ['Check your webhook url.']);
-      this.results = e;
-      throw e;
-    });
-
+    return res;
   }
 }

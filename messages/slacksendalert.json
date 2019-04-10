@@ -1,6 +1,7 @@
 {
     "commandDescription": "sends specified message to the specified phone number",
-    "messageFlagDescription": "the message to send",
+    "messageFlagDescription": "the message to post",
+    "channelFlagDescription": "the channel to post the message to",
     "emojiFlagDescription": "an emoji to add like ':thumbsup:' "
   }
   

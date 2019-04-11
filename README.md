@@ -29,7 +29,7 @@ There are two methods available for sending alerts. Either with Twilio or with S
 
 There is also a sample set of bash scripts that represent a possible way to use this plugin to receive notifications during the process of creating and populating a Scratch Org and handling the result of running Apex tests in the Scratch Org.
 
-_See code [examples/bin/setup.sh](https://github.com/dcarroll/alerter/blob/v1.0.0/examples/bin/setup.sh) and [examples/bin/util.sh](https://github.com/dcarroll/alerter/blob/v1.0.0/examples/bin/util.sh)_
+_See code [examples/bin/setup.sh](https://github.com/dcarroll/alerter/blob/master/examples/bin/setup.sh) and [examples/bin/util.sh](https://github.com/dcarroll/alerter/blob/master/examples/bin/util.sh)_
 
 <!-- toc -->
 ### [Debugging your plugin](#debugging-your-plugin)

@@ -1,0 +1,9 @@
+{
+    "commandDescription": "sends specified file to slack channel",
+    "filepathFlagDescription": "the path to the file to be posted",
+    "filenameFlagDescription": "the name of the file to be posted",
+    "channelFlagDescription": "the channel to post the file to",
+    "initialcommentFlagDescription": "an initial comment to include with the file",
+    "titleFlagDescription": "a title to give to the file post"
+  }
+  

@@ -1,5 +1,7 @@
 import SlackConfig from './slackconfig';
 import { WebClient, WebAPICallResult } from '@slack/web-api';
+import { readFileSync } from 'fs';
+import { basename } from 'path';
 
 export default class SlackLib {
     protected static slackToken: string;
@@ -23,13 +25,18 @@ export default class SlackLib {
         return resp;
     }
 
-    public static async refreshChannelList() {
+    public static async channelList() {
         await this.getSlackToken();
         const web = new WebClient(this.slackToken);
         const resp:any = await web.channels.list({ exclude_members: true, exclude_archived: true })
-        const slackconfig = await SlackConfig.create({ isGlobal: true });
-        slackconfig.set('channels', resp.channels);
-        slackconfig.write();
         return resp.channels;
+    }
+
+    public static async uploadFile(filepath: string, channel: string, filename?: string, initialComment?: string, title?: string) {
+        await this.getSlackToken();
+        const web = new WebClient(this.slackToken);
+        const actualfile = readFileSync(filepath);
+        const resp:any = await web.files.upload({ channels: channel, file: actualfile, filename: filename || basename(filepath), title: title, initial_comment: initialComment });
+        return resp;
     }
 }

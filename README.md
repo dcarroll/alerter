@@ -27,6 +27,8 @@ There are two methods available for sending alerts. Either with Twilio or with S
     * *Unfurls
       * Add link previews to messages (links:write)
 
+> ### Note tokens are stored in a hidden '.XXXXconfig' file on the users local computer and are not encrypted. The config commmands should be run interactively once or, in the case of CI, be stored securely in environment variables to support CI.
+
 There is also a sample set of bash scripts that represent a possible way to use this plugin to receive notifications during the process of creating and populating a Scratch Org and handling the result of running Apex tests in the Scratch Org.
 
 _See code [examples/bin/setup.sh](https://github.com/dcarroll/alerter/blob/master/examples/bin/setup.sh) and [examples/bin/util.sh](https://github.com/dcarroll/alerter/blob/master/examples/bin/util.sh)_

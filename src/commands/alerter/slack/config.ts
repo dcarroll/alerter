@@ -1,10 +1,8 @@
-import { flags, SfdxCommand, TableOptions }   from '@salesforce/command';
+import { flags, SfdxCommand }   from '@salesforce/command';
 import { Messages, SfdxError }  from '@salesforce/core';
 import { AnyJson }              from '@salesforce/ts-types';
 import SlackConfig              from '../../../lib/slackconfig';
 import SlackLib                 from '../../../lib/slacklib';
-import { TableColumn } from 'cli-ux/lib/styled/table';
-
 
 // Initialize Messages with the current plugin directory
 Messages.importMessagesDirectory(__dirname);
@@ -45,16 +43,7 @@ export default class Configure extends SfdxCommand {
   }
 
   public async run(): Promise<AnyJson> {
-    const res = await this.validateToken();
-    const refreshChannel = await this.ux.prompt('Refresh channel list <y/n>?', { default: 'n', type: 'single' });
-    if (refreshChannel === 'y') {
-      const channels = await SlackLib.refreshChannelList();
-      this.ux.log('');
-      this.ux.table(channels, { columns: [ 
-        { key: 'name', label: 'Name' },
-        { key: 'id', label: 'ID'}, 
-        { key: 'purpose.value', label: 'Purpose'}]});
-      }
+    const res = await this.validateToken();    
     return res;
   }
 }

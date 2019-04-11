@@ -1,5 +1,5 @@
 {
-    "commandDescription": "sends specified message to the specified phone number",
+    "commandDescription": "sends specified message to the specified slack channel",
     "messageFlagDescription": "the message to post",
     "channelFlagDescription": "the channel to post the message to",
     "emojiFlagDescription": "an emoji to add like ':thumbsup:' "

@@ -1,12 +1,12 @@
 alerter
 =======
 
-Send twilio sms messages from command line
+Send twilio sms messages or post chats to slack from command line
 
 [![Version](https://img.shields.io/npm/v/alerter.svg)](https://npmjs.org/package/alerter)
 [![CircleCI](https://circleci.com/gh/dcarroll/alerter/tree/master.svg?style=shield)](https://circleci.com/gh/dcarroll/alerter/tree/master)
 [![Appveyor CI](https://ci.appveyor.com/api/projects/status/github/dcarroll/alerter?branch=master&svg=true)](https://ci.appveyor.com/project/heroku/alerter/branch/master)
-
+[![Greenkeeper](https://badges.greenkeeper.io/dcarroll/alerter.svg)](https://greenkeeper.io/)
 [![Known Vulnerabilities](https://snyk.io/test/github/dcarroll/alerter/badge.svg)](https://snyk.io/test/github/dcarroll/alerter)
 [![Downloads/week](https://img.shields.io/npm/dw/alerter.svg)](https://npmjs.org/package/alerter)
 [![License](https://img.shields.io/npm/l/alerter.svg)](https://github.com/dcarroll/alerter/blob/master/package.json)
@@ -16,8 +16,9 @@ Send twilio sms messages from command line
 <!-- tocstop -->
 <!-- install -->
 <!-- usage -->
+***Not Yet Published To NPM - please clone, build and ling to the SFDX CLI***
 ```sh-session
-$ npm install -g alerter
+$ sfdx plugins:install alerter
 $ sfdx COMMAND
 running command...
 $ sfdx (-v|--version|version)

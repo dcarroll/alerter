@@ -20,17 +20,17 @@
     "@oclif/dev-cli": "^1",
     "@oclif/plugin-help": "^2",
     "@oclif/test": "^1",
-    "@salesforce/dev-config": "1.4.1",
+    "@salesforce/dev-config": "1.4.4",
     "@types/chai": "^4",
     "@types/mocha": "^5",
-    "@types/node": "^10",
+    "@types/node": "^11.13.4",
     "chai": "^4",
-    "globby": "^8",
-    "mocha": "^5",
+    "globby": "^9.2.0",
+    "mocha": "^6.1.2",
     "nyc": "^13",
     "ts-node": "^8",
     "tslint": "^5",
-    "typescript": "~3.3"
+    "typescript": "~3.4.3"
   },
   "engines": {
     "node": ">=8.0.0"

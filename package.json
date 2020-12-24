@@ -14,7 +14,7 @@
     "@slack/webhook": "^5.0.0",
     "@types/twilio": "0.0.10",
     "tslib": "^1",
-    "twilio": "^3.30.0"
+    "twilio": "^4.6.0"
   },
   "devDependencies": {
     "@oclif/dev-cli": "^1",

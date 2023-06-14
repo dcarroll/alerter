@@ -8,13 +8,13 @@
     "@oclif/command": "^1",
     "@oclif/config": "^1",
     "@oclif/errors": "^1",
-    "@salesforce/command": "^2.0.0",
-    "@salesforce/core": "^2.15.3",
+    "@salesforce/command": "^5.0.0",
+    "@salesforce/core": "^3.32.12",
     "@slack/web-api": "^5.0.0",
     "@slack/webhook": "^5.0.0",
     "@types/twilio": "0.0.10",
     "tslib": "^1",
-    "twilio": "^3.30.0"
+    "twilio": "^4.0.0"
   },
   "devDependencies": {
     "@oclif/dev-cli": "^1",

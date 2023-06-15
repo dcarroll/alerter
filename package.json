@@ -13,7 +13,7 @@
     "@slack/web-api": "^5.0.0",
     "@slack/webhook": "^5.0.0",
     "@types/twilio": "2.11.0",
-    "tslib": "^1",
+    "tslib": "^2.5.2",
     "twilio": "^4.0.0"
   },
   "devDependencies": {

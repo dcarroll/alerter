@@ -10,7 +10,7 @@
     "@oclif/errors": "^1",
     "@salesforce/command": "^5.0.0",
     "@salesforce/core": "^3.32.12",
-    "@slack/web-api": "^5.0.0",
+    "@slack/web-api": "^6.8.1",
     "@slack/webhook": "^5.0.0",
     "@types/twilio": "2.11.0",
     "tslib": "^1",

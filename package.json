@@ -11,7 +11,7 @@
     "@salesforce/command": "^5.0.0",
     "@salesforce/core": "^3.32.12",
     "@slack/web-api": "^5.0.0",
-    "@slack/webhook": "^5.0.0",
+    "@slack/webhook": "^7.0.0",
     "@types/twilio": "2.11.0",
     "tslib": "^1",
     "twilio": "^4.0.0"
